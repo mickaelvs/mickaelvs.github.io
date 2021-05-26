@@ -9,19 +9,69 @@
     <title>Les codes de retour HTTP indispensables à connaître</title>
 </head>
 <body>
+    <p>Source: <a href="https://blog.nicolas.brondin-bernard.com/les-codes-de-retour-http-indispensables-a-connaitre/">https://blog.nicolas.brondin-bernard.com/les-codes-de-retour-http-indispensables-a-connaitre/</a></p>
     <h1>Les codes de retour HTTP indispensables à connaître</h1>
-    <p>Lorsque l'on reçoit une réponse HTTP, cette dernière contient de nombreuses informations (dont beaucoup sont similaires à une requête), mais l'une de ses données la plus importante est <strong>le code de statut http.</strong></p>
-    <p>Aussi appelé code de réponse ou code de retour</p>
-    <p>Ce code, associé à un statut (un message sous forme de texte) et indissociable de ce dernier, va nous donner <strong>deux informations très précises:</strong></p>
-    <ul>
-        <li><strong>Ce qu'il s'est passé,</strong> ou non, sur le serveur</li>
-        <li><strong>Ce que contient le corps</strong> de la réponse HTTP</li>
-    </ul>
-    <p>Si le code indique un succès, on sait que le serveur a pu faire son travail correctement et <strong>nous retourner les données attendues.</strong></p>
-    <p>Tandis que si l'on reçoit un code d'erreur, on va savoir pourquoi la requête n'a pas pu s'éxécuter correctement, et que l'on pourra trouver <strong>plus d'informations dans le corps de la réponse.</strong></p>
-    <p>Pour bien les distinguer, les codes HTTP sont séparés en <strong>5 grandes familles, dont chacune est représentée par le premier chiffre du code.</strong></p>
+
+            <p>Lorsque l'on reçoit une réponse HTTP, cette dernière contient de nombreuses informations (dont beaucoup sont similaires à une requête), mais l'une de ses données la plus importante est <strong>le code de statut http.</strong></p>
+                <blockquote>Aussi appelé code de réponse ou code de retour</blockquote>
+            <p>Ce code, associé à un statut (un message sous forme de texte) et indissociable de ce dernier, va nous donner <strong>deux informations très précises:</strong></p>
+                <ul>
+                    <li><strong>Ce qu'il s'est passé,</strong> ou non, sur le serveur</li>
+                    <li><strong>Ce que contient le corps</strong> de la réponse HTTP</li>
+                </ul>
+            <p>Si le code indique un succès, on sait que le serveur a pu faire son travail correctement et <strong>nous retourner les données attendues.</strong><br>
+            <br>Tandis que si l'on reçoit un code d'erreur, on va savoir pourquoi la requête n'a pas pu s'éxécuter correctement, et que l'on pourra trouver <strong>plus d'informations dans le corps de la réponse.</strong><br>
+            <br>Pour bien les distinguer, les codes HTTP sont séparés en <strong>5 grandes familles, dont chacune est représentée par le premier chiffre du code.</strong></p>
+
     <h2>Code 1xx - Informations</h2>
-    <h3>100 - Continue</h3>
-    <p>Dans le cadre d'une requête classique</p>
+        <h3>100 - Continue</h3>
+            <p>Dans le cadre d'une requête classique, on privilégiera plutôt les codes 200 ou 201 pour indiquer un succès, mais parfois le code 100 permet de dire que <strong>la requête n'a pas été rejetée et qu'elle peut continuer, sans indiquer un réel succès.</strong></p>
+                <blockquote>En pratique, ce code peut par exemple être utilisé lors de l'envoi d'un fichier très lourd au serveur pour indiquer au client que le serveur accepte le fichier, sans savoir si l'upload se passera sans encombre</blockquote>
+    <h2>Code 2xx - Succès</h2>
+        <h3>200 - Ok</h3>
+            <p><strong>Indique le succès de la requête, le corps de la réponse contiendra alors la ressource demandée</strong> ou le résultat de l'opération effectuée. On réserve ce statut pour les opérations que l'on appelle "idempotentes".</p>
+                <blockquote>Si le concept d'idempotence est étrangé voir cet article : <a href="https://blog.nicolas.brondin-bernard.com/que-signifie-idempotence-en-programmation/">https://blog.nicolas.brondin-bernard.com/que-signifie-idempotence-en-programmation/</a></blockquote>
+        <h3>201 - Created</h3>
+            <p><strong>Lorsque l'opération effectuée a créée une ressource sur le serveur</strong> (ou dans la base de données); on utilisera alors plutôt le code 201 à la place du code 200.</p>
+    <h2>Code 3xx - Redirection</h2>
+            <p>Changer l'adresse d'une ressource numérique est beaucoup plus simple que de changer l'adresse d'une habitation, il faut donc une méthode pour indiquer facilement le nouvel emplacement de cette ressource.<br>
+            <br>Les code 3xx sont justement faits pour ça, et ils peuvent d'ailleurs eux-mêmes renvoyer vers un autre code 3xx si la ressource a encore changé de place.</p>
+        <h3>301 - Moved Permanently</h3>
+            <p><strong>La redirection 301 signifie que la ressource a été déplacée de manière permanente.</strong> Grâce à la nouvelle URL présente dans l'en-tête "Location", les navigateurs et les moteurs de recherches redirigent automatiquement l'utilisateur vers la nouvelle destination.</p>
+                <blockquote>En terme de SEO, la redirection permanente permet de garder le référencement naturel de la page à son ancienne URL.</blockquote>
+        <h3>302 - Found</h3>
+            <p>Équivalent à une <strong>redirection temporaire.</strong></p>
+                <blockquote>Contrairement à une redirection permanente (301), la redirection temporaire ne redirige pas le référencement naturel, car l'opération doit être limitée dans le temps.</blockquote>
+        <h3>304 - Not modified</h3>
+            <p>Indique que <strong>le contenu de la réponse n'a pas changé depuis la dernière requête,</strong> et que le client peut utiliser la version de la ressource présente dans son cache.</p>
+    <h2>Code 4xx - Erreur client</h2>
+            <p>Même lorsque votre serveur fonctionne à la perfection, il arrive que certaines requêtes utilisateurs ne parviennent pas à s'éxécuter jusqu'au bout pour diverses raisons.</p>
+                <blockquote>Cela peut venir d'une erreur de saisie, d'une tentative d'accès à des données privées, à des données qui n'existent plus, etc...</blockquote>
+        <h3>400 - Bad Request</h3>
+            <p>Ce code fait référence à la <strong>syntaxe et au contenu de la requête qui ne permet pas au serveur d'effectuer l'opération voulue.</strong></p>
+                <blockquote>Un exemple basique de l'utilisation de ce code est l'envoi d'un formulaire incomplet, les informations manquantes rendent le traitement impossible.</blockquote>
+        <h3>401 - Unauthorized</h3>
+            <p>Non autorisé, ou plutôt synonyme de "non authentifié", ce code indque que <strong>le client doit fournir ses informations d'identification</strong> afin que le serveur puisse retourner la réponse attendue.</p>
+        <h3>403 - Forbidden</h3>
+            <p>Indique qu'une ressource est inaccessible à  un utilisateur <strong>même lorsque ce dernier est authentifié.</strong></p>
+        <h3>404 - Not Found</h3>
+            <p>Sans doute le seul code HTTP à être rentré dans la culture populaire, le code 404 indique que <strong>la ressource situé à l'URI demandée n'esxiste pas</strong> (ou plus).</p>
+                <blockquote>À noter qu'il est important de proposer une page spécifique pour cette erreur, comme expliqué <a href="https://blog.nicolas.brondin-bernard.com/comme-faire-une-bonne-page-404/">ici</a></blockquote>
+        <h3>409 - Conflict</h3>
+            <p>Ce code indique que <strong>la requête rentre en conflit avec l'état actuel</strong> du serveur.</p>
+                <blockquote>En pratique cela peut indiquer qu'une ressource que le client essaye de créer existe déjà sur le serveur.</blockquote>
+    <h2>Code 5xx - Erreur serveur</h2>
+            <p>Lorsque la requête est correcte mais que le serveur n'est pas capable de la traiter, alors ce dernier renvoie un code d'erreur serveur.<br><br>C'est la seule catégorie qui, dans le meilleur des mondes, ne devrait jamais être envoyée, mais qui dans la réalité est indispensable !</p>
+        <h3>500 - Internal Server Error</h3>
+            <p>Le code 500 indique que la requête n'a pas pu être traitée par le serveur <strong>car il a rencontré une situation inattendue.</strong></p>
+                <blockquote>C'est en général l'erreur par défaut renvoyé par le serveur lorsque quelque chose s'est mal passé sans que l'on en connaisse encore la cause.</blockquote>
+        <h3>503 - Service Unavailable</h3>
+            <p>Ce code est renvoyé lorsque <strong>le serveur n'est pas accessible et n'est pas en capacité de répondre à la requête,</strong> à cause d'un bug, d'une maintenance ou d'une surcharge utilisateur.</p>
+    <h2>En bonus</h2>
+        <h3>418 - I'm a teapot</h3>
+            <p>Issu d'un poisson d'avril, ce code de statut 418 indique que <strong>le serveur refuse de servir du café, car c'est désormais une théière.</strong><br>Bien que parti d'une plaisanterie, le code 418 est réservé et implémenté dans de nombreuses implémentations de serveurs web comme pour se souvenir que derrière chaque système informatique, il y a le travail de nombreux êtres humains.</p>
+                <blockquote>Pour lutter contre la conservation de ce code, une initiative appelée <a href="https://save418.com/">save418 a été lancée</a> et a largement remportée le soutien populaire !</blockquote>
+        <h3>Les autres codes</h3>
+            <p><strong>Il existe de nombreux autres codes de statut HTTP</strong> qu'il est intéressant de découvrir, pour cela je vous invite à <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status">vous rendre sur la documentation de Mozilla !</a></p>
 </body>
 </html>

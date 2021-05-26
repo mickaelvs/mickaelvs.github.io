@@ -14,12 +14,12 @@ html, body {
     }
    h2 {
     font-size: 150%; 
-    color: red; 
+    color: rebeccapurple; 
     padding-left: 15px;
     }
     h3 {
         font-size: 125%; 
-        color: cyan; 
+        color: burlywood; 
         padding-left: 15px;
         }
    p,ul,li,td {
@@ -38,4 +38,11 @@ html, body {
    }
    a:active, a:focus {
     color: red;
+   }
+   blockquote {
+       margin: 0 0 1.5em;
+       padding: 0 1.5em;
+       border-left: #3eb0ef 3px solid;
+       background-color: white;
+       color: black;
    }

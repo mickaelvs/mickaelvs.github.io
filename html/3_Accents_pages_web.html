@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/normalize.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <title>Comment résoudre les problèmes d'accents dans vos pages web ?</title>
+</head>
+<body>
+    <p>Source: <a href="https://blog.nicolas.brondin-bernard.com/comment-resoudre-les-problemes-daccents-dans-vos-pages-web/">https://blog.nicolas.brondin-bernard.com/comment-resoudre-les-problemes-daccents-dans-vos-pages-web/</a></p>
+    <h1>Comment résoudre les problèmes d'accents dans vos pages web ?</h1>
+                <p>Vous venez d'enregistrer une page web et lorsque vous l'ouvrez depuis un serveur web, <strong>tous vos accents ont disparu pour laisser place à des caractères comme Ã, ©, ¨ et d'autres encore?</strong><br>Ce "bug" est dû à un mauvais encodage des caractères, ou plutôt à <strong>un encodage différent entre l'écriture du fichier html et la lecture de ce même fichier</strong> par le navigateur.</p>
+        <h2>Qu'est-ce que l'encodage de caractères ?</h2>
+                <p>Lorsque vous enregistrez un fichier texte sur votre machine, <strong>ce dernier est stocké sous forme binaire, de 0 et de 1</strong> car c'est de cette manière que les systèmes informatiques traitent l'information.</p>
+                    <blockquote>Si vous n'êtes pas très familier avec le concept de binaire, je vous laisse lire <a href="https://blog.nicolas.brondin-bernard.com/comprendre-comment-fonctionne-le-binaire/">mon article d'introduction à ce sujet !</a></blockquote>
+                <p>Logiquement, pour passer de la forme binaire à un texte lisible par nous autres humains, <strong>il faut établir une convention d'encodage et de décodage de ces caractères.</strong><br><br>Cette convention correspond tout simplement à <strong>un tableau contenant tous les caractères avec leur forme binaire,</strong>comme illustré ce-dessous :</p>
+                <img src="../css/images/code_binaire.png" alt="code bianaire">
+                <p>En l'occurence le tableau ci-dessus correspond à l'encodage <strong>UTF-8 (Universal Transformation Format - 8 bits), l'encodage désormais le plus répandu sur le web.</strong><br><br>En regardant le tableau, on peut voir que le caractère <strong>"è" correspond au code binaire "11000011 10101000"</strong>, c'est donc ce code qui se trouvera dans le fichier que vous allez enregistrer pour votre page web.<br><br>Mais si vous ne spécifiez pas l'encodage utilisé lors de l'écriture, <strong>votre navigateur utilisera l'encodage par défaut du protocole HTTP, qui est le ISO-8859-1.</strong><br><br>Comme ces deux encodages sont différents, <strong>le navigateur ira chercher la correspondance à votre code binaire dans le mauvais tablleau,</strong> et vous renverra le caractère ¨ au lieu du è attendu.</p>
+            <h3>Comment corriger ce problème ?</h3>
+                <p>La correction est très simple, puisqu'<strong>il suffit d'indiquer au navigateur l'encodage de votre fichier d'origine,</strong> pour ce faire il suffit d'ajouter une balise &lt;meta&gt; contenant l'attribut charset directement dans l'élément &lt;head&gt; de votre page web.</p>
+                <img src="../css/images/Utf8_code.png" alt="code_accent">
+                <p>Une fois que vous aurez fait cette modification, il ne vous restera plus qu'à mettre à jour votre page web et à admirer le résultat: <strong>vos accents s'affichent enfin !</strong></p>
+</body>
+</html>
